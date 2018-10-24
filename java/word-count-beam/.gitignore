@@ -61,5 +61,7 @@ local.properties
 
 /output-*
 /target/
+/java/word-count-beam/
+wordcounts-**
 
 # End of https://www.gitignore.io/api/eclipse

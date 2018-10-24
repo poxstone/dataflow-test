@@ -1,4 +1,15 @@
-# datafloe
+# Datafloe
+
+## import eclipse
+1. Import Eclipse like a Maven project
+1. Run as "Java Application" or "Dataflow pipelines"
+1. Set Main Class "MinimalWordCount"
+1. Configure "Properties > Google Cloud Platform > Cloud Dataflow"
+    - Account
+    - Project Id
+    - Cloud Storage
+    - Service account key
+
 
 ## Run locally
 ```bash
