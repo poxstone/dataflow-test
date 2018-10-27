@@ -13,11 +13,15 @@
 
 ## Run locally
 ```bash
-mvn compile exec:java -Dexec.mainClass=org.apache.beam.examples.WordCount -Dexec.args="--output=./output/";
+# eclipse "Run">"Run configurations..."
+export export GOOGLE_APPLICATION_CREDENTIALS="";
+mvn compile exec:java -Dexec.mainClass=org.apache.beam.examples.MinimalWordCount -Dexec.args="--output=./output/";
 ```
 
 ## Deploy
 ```bash
+PROJECT_ID="";
+STORAGE_BUCKET="";
 mvn -Pdataflow-runner compile exec:java \
       -Dexec.mainClass=org.apache.beam.examples.WordCount \
       -Dexec.args="--project=${PROJECT_ID} \
