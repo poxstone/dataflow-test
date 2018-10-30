@@ -29,6 +29,7 @@ import org.apache.beam.sdk.transforms.MapElements;
 import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.TypeDescriptors;
 
+
 /**
  * An example that counts words in Shakespeare.
  *
@@ -95,9 +96,15 @@ public class MinimalWordCount {
         // individual word in Shakespeare's collected texts.
         .apply(
             FlatMapElements.into(TypeDescriptors.strings())
-                .via((String word) -> Arrays.asList(word.split("[^\\p{L}]+"))))
+                .via((String word) -> {
+                	String[] arrayw = (word + "").split("[^\\p{L}]+");
+                	return Arrays.asList(word.split("[^\\p{L}]+"));
+                	}))
         // We use a Filter transform to avoid empty word
-        .apply(Filter.by((String word) -> !word.isEmpty()))
+        .apply(Filter.by((String word) -> {
+        	Boolean emtylio = !(word + "").isEmpty();
+        	return !word.isEmpty();
+        }))
         // Concept #3: Apply the Count transform to our PCollection of individual words. The Count
         // transform returns a new PCollection of key/value pairs, where each key represents a
         // unique word in the text. The associated value is the occurrence count for that word.
@@ -107,8 +114,11 @@ public class MinimalWordCount {
         .apply(
             MapElements.into(TypeDescriptors.strings())
                 .via(
-                    (KV<String, Long> wordCount) ->
-                        wordCount.getKey() + ": " + wordCount.getValue()))
+                    (KV<String, Long> wordCount) ->{
+                        String retunrString = wordCount.getKey() + ": " + wordCount.getValue();
+                        return retunrString;
+                        
+                    }))
         // Concept #4: Apply a write transform, TextIO.Write, at the end of the pipeline.
         // TextIO.Write writes the contents of a PCollection (in this case, our PCollection of
         // formatted strings) to a series of text files.
