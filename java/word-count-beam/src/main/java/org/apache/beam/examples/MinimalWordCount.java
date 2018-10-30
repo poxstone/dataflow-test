@@ -94,21 +94,21 @@ public class MinimalWordCount {
         // Concept #2: Apply a FlatMapElements transform the PCollection of text lines.
         // This transform splits the lines in PCollection<String>, where each element is an
         // individual word in Shakespeare's collected texts.
-        .apply(
+        .apply("Extraer words",
             FlatMapElements.into(TypeDescriptors.strings())
                 .via((String word) -> {
                 	String[] arrayw = (word + "").split("[^\\p{L}]+");
                 	return Arrays.asList(word.split("[^\\p{L}]+"));
                 	}))
         // We use a Filter transform to avoid empty word
-        .apply(Filter.by((String word) -> {
+        .apply("Filtar words", Filter.by((String word) -> {
         	Boolean emtylio = !(word + "").isEmpty();
         	return !word.isEmpty();
         }))
         // Concept #3: Apply the Count transform to our PCollection of individual words. The Count
         // transform returns a new PCollection of key/value pairs, where each key represents a
         // unique word in the text. The associated value is the occurrence count for that word.
-        .apply(Count.perElement())
+        .apply("Contar words", Count.perElement())
         // Apply a MapElements transform that formats our PCollection of word counts into a
         // printable string, suitable for writing to an output file.
         .apply(
