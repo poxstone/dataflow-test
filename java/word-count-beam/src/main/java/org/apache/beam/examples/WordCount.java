@@ -159,7 +159,7 @@ public class WordCount {
      * this option to choose a different input file or glob.
      */
     @Description("Path of the file to read from")
-    @Default.String("gs://apache-beam-samples/shakespeare/kinglear.txt")
+    @Default.String("gs://apache-beam-samples/shakespeare/*")
     String getInputFile();
 
     void setInputFile(String value);

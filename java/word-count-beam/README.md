@@ -11,7 +11,7 @@
     - Service account key
 
 
-## Run locally
+## Run locally beam
 ```bash
 # eclipse "Run">"Run configurations..."
 export export GOOGLE_APPLICATION_CREDENTIALS="";
